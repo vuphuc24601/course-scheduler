@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import java.util.ArrayList?>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.monthView">
+   <children>
+      <VBox prefHeight="472.0" prefWidth="69.0" style="-fx-background-color: #0277BD;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#initialize" prefHeight="53.0" prefWidth="74.0" text="Add">
+               <effect>
+                  <Blend />
+               </effect></Button>
+            <Button layoutX="10.0" layoutY="63.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="74.0" text="Mail">
+               <VBox.margin>
+                  <Insets top="277.0" />
+               </VBox.margin>
+            </Button>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="74.0" text="Calendar" />
+            <Button layoutX="10.0" layoutY="63.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="74.0" text="Settings" />
+            <Button layoutX="10.0" layoutY="117.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="69.0" text="More">
+               <opaqueInsets>
+                  <Insets top="100.0" />
+               </opaqueInsets></Button>
+         </children>
+      </VBox>
+      <AnchorPane fx:id="anchorRoot" prefHeight="507.0" prefWidth="976.0">
+
+
+               <children>
+            <Label layoutX="14.0" layoutY="2.0" prefHeight="24.0" prefWidth="89.0" text="Calendar">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <HBox layoutX="22.0" layoutY="26.0" prefHeight="61.0" prefWidth="918.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#prevMonth" prefHeight="65.0" prefWidth="76.0" text="-" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#nextMonth" prefHeight="65.0" prefWidth="76.0" text="+" />
+                  <Label fx:id="monthLabel" alignment="BASELINE_CENTER" prefHeight="71.0" prefWidth="116.0" text="May" textFill="#0277bd">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="yearLabel" alignment="CENTER" prefHeight="70.0" prefWidth="79.0" text="2021" textAlignment="CENTER" textFill="#2478c1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BASELINE_CENTER" prefHeight="62.0" prefWidth="85.0" text="Today" textFill="#0277bd">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="450.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="BASELINE_CENTER" prefHeight="62.0" prefWidth="85.0" text="Day" textFill="#0277bd">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BASELINE_CENTER" prefHeight="62.0" prefWidth="85.0" text="Week" textFill="#0277bd">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="BASELINE_CENTER" prefHeight="62.0" prefWidth="81.0" text="Month" textFill="#0277bd">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label alignment="BASELINE_CENTER" layoutX="22.0" layoutY="106.0" prefHeight="24.0" prefWidth="89.0" text="Sunday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Pane layoutX="22.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label1" layoutX="18.0" layoutY="17.0" prefHeight="28.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Label alignment="BASELINE_CENTER" layoutX="151.0" layoutY="106.0" prefHeight="24.0" prefWidth="89.0" text="Monday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Label alignment="BASELINE_CENTER" layoutX="281.0" layoutY="106.0" prefHeight="24.0" prefWidth="89.0" text="Tuesday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Label alignment="BASELINE_CENTER" layoutX="409.0" layoutY="106.0" prefHeight="24.0" prefWidth="116.0" text="Wednesday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Label alignment="BASELINE_CENTER" layoutX="560.0" layoutY="106.0" prefHeight="24.0" prefWidth="89.0" text="Thursday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Label alignment="BASELINE_CENTER" layoutX="707.0" layoutY="106.0" prefHeight="24.0" prefWidth="89.0" text="Friday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Label alignment="BASELINE_CENTER" layoutX="850.0" layoutY="106.0" prefHeight="24.0" prefWidth="89.0" text="Sunday">
+               <font>
+                  <Font name="Century" size="19.0" />
+               </font>
+            </Label>
+            <Pane layoutX="281.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label3" layoutX="18.0" layoutY="17.0" prefHeight="28.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label2" layoutX="16.0" layoutY="18.0" prefHeight="28.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="422.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label4" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="707.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label6" layoutX="12.0" layoutY="13.0" prefHeight="36.0" prefWidth="66.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="559.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label5" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="850.0" layoutY="142.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label7" layoutX="15.0" layoutY="13.0" prefHeight="36.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label8" layoutX="15.0" layoutY="17.0" prefHeight="28.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label10" layoutX="15.0" layoutY="13.0" prefHeight="36.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label9" layoutX="15.0" layoutY="17.0" prefHeight="28.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="422.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label11" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="707.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label13" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="559.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label12" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="850.0" layoutY="218.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label14" layoutX="12.0" layoutY="13.0" prefHeight="36.0" prefWidth="66.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label15" layoutX="15.0" layoutY="17.0" prefHeight="28.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label17" layoutX="14.0" layoutY="17.0" prefHeight="28.0" prefWidth="61.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label16" layoutX="15.0" layoutY="13.0" prefHeight="36.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="422.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label18" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="707.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label20" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="559.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label19" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="850.0" layoutY="297.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label21" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label22" layoutX="15.0" layoutY="13.0" prefHeight="36.0" prefWidth="60.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label24" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label23" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="422.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label25" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="707.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label27" layoutX="18.0" layoutY="17.0" prefHeight="28.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="559.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label26" layoutX="22.0" layoutY="17.0" prefHeight="28.0" prefWidth="46.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="850.0" layoutY="380.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label28" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label231" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label29" layoutX="17.0" layoutY="15.0" prefHeight="34.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label2311" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label30" layoutX="18.0" layoutY="14.0" prefHeight="34.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label23111" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label31" layoutX="17.0" layoutY="15.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="422.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label231111" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label32" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="560.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label2311111" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label33" layoutX="22.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="707.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label23111111" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label34" layoutX="22.0" layoutY="13.0" prefHeight="36.0" prefWidth="46.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="850.0" layoutY="462.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label231111111" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label35" layoutX="18.0" layoutY="14.0" prefHeight="34.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label2312" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label36" layoutX="17.0" layoutY="15.0" prefHeight="34.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="151.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label23112" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label37" layoutX="18.0" layoutY="14.0" prefHeight="34.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="281.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label231112" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label38" layoutX="17.0" layoutY="15.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="422.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label2311112" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label39" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="560.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label23111112" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label40" layoutX="22.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="707.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label231111112" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label41" layoutX="22.0" layoutY="13.0" prefHeight="36.0" prefWidth="46.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="850.0" layoutY="541.0" prefHeight="61.0" prefWidth="89.0" style="-fx-border-color: #0277BD;">
+               <children>
+                  <Label fx:id="label2311111111" layoutX="18.0" layoutY="13.0" prefHeight="36.0" prefWidth="53.0" />
+                  <Label fx:id="label42" layoutX="18.0" layoutY="14.0" prefHeight="34.0" prefWidth="53.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+
+    <fx:define>
+        <ArrayList fx:id="labelList">
+            <fx:reference source="label1" />
+            <fx:reference source="label2" />
+            <fx:reference source="label3" />
+            <fx:reference source="label4" />
+            <fx:reference source="label5" />
+            <fx:reference source="label6" />
+            <fx:reference source="label7" />
+            <fx:reference source="label8" />
+            <fx:reference source="label9" />
+            <fx:reference source="label10" />
+            <fx:reference source="label11" />
+            <fx:reference source="label12" />
+            <fx:reference source="label13" />
+            <fx:reference source="label14" />
+            <fx:reference source="label15" />
+            <fx:reference source="label16" />
+            <fx:reference source="label17" />
+            <fx:reference source="label18" />
+            <fx:reference source="label19" />
+            <fx:reference source="label20" />
+            <fx:reference source="label21" />
+            <fx:reference source="label22" />
+            <fx:reference source="label23" />
+            <fx:reference source="label24" />
+            <fx:reference source="label25" />
+            <fx:reference source="label26" />
+            <fx:reference source="label27" />
+            <fx:reference source="label28" />
+            <fx:reference source="label29" />
+            <fx:reference source="label30" />
+            <fx:reference source="label31" />
+            <fx:reference source="label32" />
+            <fx:reference source="label33" />
+            <fx:reference source="label34" />
+            <fx:reference source="label35" />
+            <fx:reference source="label36" />
+            <fx:reference source="label37" />
+            <fx:reference source="label38" />
+            <fx:reference source="label39" />
+            <fx:reference source="label40" />
+            <fx:reference source="label41" />
+            <fx:reference source="label42" />
+        </ArrayList>
+    </fx:define>
+
+</HBox>
