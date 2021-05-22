@@ -8,10 +8,14 @@ import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import sql.DatabaseConnection;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.sql.Connection;
 
 public class Controller implements Initializable {
 
@@ -27,6 +31,9 @@ public class Controller implements Initializable {
     String endTime;
     String startDate;
     String endDate;
+
+    static DatabaseConnection connectNow = new DatabaseConnection();
+    static Connection connectDB = connectNow.getConnection();
 
     public void addEvent() {
         String title = title_id.getText();
@@ -51,4 +58,8 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
+
+
 }
