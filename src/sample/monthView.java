@@ -39,6 +39,7 @@ public class monthView {
     public void initialize() {
         displayCurrentMonth();
     }
+    public int monthLimit;
 
     {
         this.crrMonth = 5;
@@ -53,6 +54,7 @@ public class monthView {
 
         row = 6;
         column  = 7;
+
     }
 
     // for controlling the calendar
@@ -97,7 +99,6 @@ public class monthView {
          * Be noted  date would be displayed by labelList
          */
         int crrDate =1;
-        int monthLimit;
         monthLimit = numberOfDayOfMonths[crrMonth];
         if (crrMonth == 2 ) monthLimit += isLeapYear(crrYear);
         for (int i = 0 ; i<= 5;i++){
@@ -197,6 +198,20 @@ public class monthView {
 
         return  numberOfDayApart%7;
     }
+    int  tinder (int day){
+        /**
+         * Return the first Date in the current month match with day of the week
+         * @param day : Interger
+         *            0 = Sunday ->  6 = Saturday
+         *            denote the day of the  week
+         */
+        for (int i = 1; i <= monthLimit ; i++)
+            if (getDayOfTheWeek(i,crrMonth,crrYear) == day)
+                return i;
+        return 0;
+    }
+
+    // resolve the event stuff
     void addEvent (String Sdate, String Edate, String title, boolean Day, boolean Date, Color color){
         /**
          * @param Sdate : String
@@ -220,14 +235,6 @@ public class monthView {
         if (!eve.isOverlapped())
             Event.EventManager.add (eve);
     }
-    void displayEvent(){
-        for (int i = 0 ; i < Event.EventManager.size(); i++)
-        // check there are any event  during the currently display month
-        if  (Event.EventManager.get(i).startDate.Sdate[2] <= crrYear && crrYear <=  Event.EventManager.get(i).endDate.Sdate[2])
-            if (Event.EventManager.get(i).startDate.Sdate[1] <= crrMonth && crrMonth <=  Event.EventManager.get(i).endDate.Sdate[1])
-        {
-            
-        }
-    }
+ 
 }
 
