@@ -103,6 +103,7 @@ class Event{
         this.title = title;
         this.everyday  = Day;
         this.everyDate = Date;
+
     }
     Boolean isOverlapped (){
         /**
