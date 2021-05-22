@@ -1,0 +1,8 @@
+CREATE TABLE course (
+course_id VARCHAR(60) NOT NULL PRIMARY KEY,
+title VARCHAR(90) NOT NULL,
+credit INT UNSIGNED NOT NULL,
+description BLOB, 
+color VARCHAR(30)
+)
+
