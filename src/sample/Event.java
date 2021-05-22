@@ -26,15 +26,15 @@ public class Event {
 }
 
 class Course extends Event {
-    ArrayList<String> instructors;
+    //ArrayList<String> instructors;
     int credit;
     String course_id;
 
     Course(String title, String description, String startTime, String endTime,
            String startDate, String endDate, ArrayList<Integer> recur,
-           ArrayList<String> instructors, int credit, String course_id) {
+           int credit, String course_id) {
         super(title, description, startTime, endTime, startDate, endDate, recur);
-        this.instructors = instructors;
+        //this.instructors = instructors;
         this.credit = credit;
         this.course_id = course_id;
     }

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="700.0" prefWidth="853.0" BorderPane.alignment="CENTER">
@@ -90,19 +89,19 @@
                 <Button mnemonicParsing="false" text="Button" />
               </items>
             </ToolBar>
-            <Button mnemonicParsing="false" text="AddEvent">
+            <Button mnemonicParsing="false" text="Add Event">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <TextField>
+            <TextField fx:id="add_course" promptText="Add Course">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
             <TableView prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="214.40001220703124" text="Courses" />
+                <TableColumn fx:id="courses" prefWidth="214.40001220703124" text="Courses" />
               </columns>
             </TableView>
          </children>
