@@ -104,6 +104,9 @@ class Event{
         this.everyDate = Date;
     }
     Boolean isOverlapped (){
+        /**
+         * Check if the current event is overlapped
+         */
         for (Event eve : EventManager ){
             if (Date.compareDate(startDate.Sdate,eve.startDate.Sdate) == 0 ){
                 if (Date.compareTime(startDate.Stime,eve.startDate.Stime) == 1 && Date.compareTime(startDate.Stime,eve.endDate.Stime) == -1) return true ;
