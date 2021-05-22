@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -14,9 +15,10 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonthView {
-    int crrMonth;
-    int crrYear;
+
+public class monthView {
+    static int crrMonth;
+    static int crrYear;
     static int currentWeek,currentYear,currentMonth;
     static final int latestLeapYear = 2020;  // for calculating number of leap years
     static final int numberOfDayOfMonths[]={0,31,28,31,30,31,30,31,31,30,31,30,31}; ;
@@ -30,12 +32,14 @@ public class MonthView {
     @FXML
     AnchorPane anchorRoot;
 
+
     // labels
     public ArrayList<Label> labelList ; // main displayer
     public Label monthLabel, yearLabel;
     public void initialize() {
         displayCurrentMonth();
     }
+    public int monthLimit;
 
     {
         this.crrMonth = 5;
@@ -50,6 +54,7 @@ public class MonthView {
 
         row = 6;
         column  = 7;
+
     }
 
     // for controlling the calendar
@@ -94,7 +99,6 @@ public class MonthView {
          * Be noted  date would be displayed by labelList
          */
         int crrDate =1;
-        int monthLimit;
         monthLimit = numberOfDayOfMonths[crrMonth];
         if (crrMonth == 2 ) monthLimit += isLeapYear(crrYear);
         for (int i = 0 ; i<= 5;i++){
@@ -152,17 +156,22 @@ public class MonthView {
         return  (int) Math.abs(anchor - yearFrom)/4 ;
     }
 
-    static int sumOfMonth(int monthFrom, int monthTo){
+    static int sumOfMonth(int monthFrom, int monthTo, int  year){
         /**
          * @param monthFrom : Interger
          *                   starting month
          * @param monthTo : Interger
          *                ending months
+         * @param year : Interger
+         *             to determine whether it is a leap year with 1 extra day
          * return :the total number of day from monthFrom to monthTo
          */
         int res =0;
-        for (int i= monthFrom; i <= monthTo; i++)
-            res += numberOfDayOfMonths [i];
+        for (int i= monthFrom; i <= monthTo; i++) {
+            res += numberOfDayOfMonths[i];
+            if (i == 2)
+                res +=isLeapYear(year) ;
+        }
         return res ;
     }
     static int getDayOfTheWeek (int day, int month, int year){
@@ -180,14 +189,65 @@ public class MonthView {
 
         if (2017 <= year) {
             // if the year consider is later than 2017
-            numberOfDayApart += sumOfMonth(1,month-1);
+            numberOfDayApart += sumOfMonth(1,month-1,year);
             numberOfDayApart += day ;
             if (2017 == year ) numberOfDayApart -=1;
         }
         else    // if year is less than 2017
-            numberOfDayApart = sumOfMonth(month+1,12) + numberOfDayOfMonths[month] - day +1;
+            numberOfDayApart = sumOfMonth(month+1,12,year) + numberOfDayOfMonths[month] - day +1;
 
         return  numberOfDayApart%7;
     }
+    int  tinder (int day){
+        /**
+         * Return the first Date in the current month match with day of the week
+         * @param day : Interger
+         *            0 = Sunday ->  6 = Saturday
+         *            denote the day of the  week
+         */
+        for (int i = 1; i <= monthLimit ; i++)
+            if (getDayOfTheWeek(i,crrMonth,crrYear) == day)
+                return i;
+        return 0;
+    }
+
+    // resolve the event stuff
+    void addEvent (int Sdd,int Smm,int Syy,int Shour,int Sminute, int Edd,int Emm,int Eyy,int Ehour,int Eminute, String title, boolean Day, boolean Date, Color color){
+        /**
+         * @param Sdate : String
+         *        starting date  and time of the event
+         * @param Edate : String
+         *        Ending date and time of the event
+         * @param Syy  : int
+         *             denote starting year
+         * @param Smm  : int
+         *             denote starting month
+         * @param Sdd  :int
+         *             dentoe starting day
+         * @param Sdate : String
+         *        starting date  and time of the event
+         * @param Eyy  : int
+         *             denote end year
+         * @param Emm  : int
+         *             denote end month
+         * @param Edd  :int
+         *             dentoe end day
+         * BE NOTED : Format for Sdate and E date
+         *            dd mm yy hour minute
+         *  for example : 22/05/2021 2:03Pm  =>  22 5 2021 14 3
+         * @param title : String
+         *              Title of the event
+         * @param day   : boolean
+         *              check if the event recurr everyday
+         * @param date  : boolean
+         *              check if the event  recurr on this date every week
+         *
+         * Event parameters : Date SD,Date ED, String title,boolean Day,Boolean Date
+         */
+        Event eve = new Event (new Date(Sdd,Smm,Syy,Shour,Sminute), new Date(Edd,Emm,Eyy,Ehour,Eminute),title,Day,Date,color);
+        if (!eve.isOverlapped())
+            Event.EventManager.add (eve);
+    }
+
 }
 
