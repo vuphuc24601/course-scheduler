@@ -70,7 +70,8 @@ class Date {
         return true;
     }
 }
-class Event{
+
+public class Event{
     /**
      * this class is meant for describing an event
      * formart for event date  : ex: for 18:45 on 23/06/2021
@@ -119,19 +120,19 @@ class Event{
     }
 }
 
-class Course extends Event {
-    //ArrayList<String> instructors;
-    int credit;
-    String course_id;
-
-    Course(String title, String description, String startTime, String endTime,
-           String startDate, String endDate, ArrayList<Integer> recur,
-           int credit, String course_id) {
-        super(title, description, startTime, endTime, startDate, endDate, recur);
-        //this.instructors = instructors;
-        this.credit = credit;
-        this.course_id = course_id;
-    }
+//class Course extends Event {
+//    //ArrayList<String> instructors;
+//    int credit;
+//    String course_id;
+//
+////    Course(String title, String description, String startTime, String endTime,
+////           String startDate, String endDate, ArrayList<Integer> recur,
+////           int credit, String course_id) {
+////        //super(title, description, startTime, endTime, startDate, endDate, recur);
+////        //this.instructors = instructors;
+////        this.credit = credit;
+////        this.course_id = course_id;
+//    }
 
     static int  compareTime (int th[], int [] o ){
         /**

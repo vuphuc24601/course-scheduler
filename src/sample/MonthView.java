@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class monthView {
+public class MonthView {
     static int crrMonth;
     static int crrYear;
     static int currentWeek,currentYear,currentMonth;
