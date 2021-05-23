@@ -5,8 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WeekController">
    <center>
       <VBox prefHeight="700.0" prefWidth="853.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,7 +26,7 @@
                   <DatePicker nodeOrientation="LEFT_TO_RIGHT" />
               </items>
             </ToolBar>
-            <GridPane gridLinesVisible="true" VBox.vgrow="ALWAYS">
+            <GridPane fx:id="scheduleGridPane" gridLinesVisible="true" VBox.vgrow="ALWAYS">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -94,16 +94,24 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <TextField fx:id="add_course" promptText="Add Course">
+            <TextField fx:id="searchCourse" onAction="#loadAllCourses" promptText="Add Course">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <TableView prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn fx:id="courses" prefWidth="214.40001220703124" text="Courses" />
-              </columns>
-            </TableView>
+            <ListView fx:id="availableCourses" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ListView>
+            <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#addSelectedCourse" text="Add" />
+            <ListView fx:id="selectedCoursesListView" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ListView>
+            <Button fx:id="removeCourseButton" mnemonicParsing="false" onAction="#removeSelectedCourse" text="Remove" />
+            <TabPane fx:id="sectionTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" />

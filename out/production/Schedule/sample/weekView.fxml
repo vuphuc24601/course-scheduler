@@ -1,14 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.WeekViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WeekController">
+   <center>
+      <VBox prefHeight="700.0" prefWidth="853.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                  <ComboBox prefWidth="150.0" />
+                  <Label text="5 Courses 18 Credits" />
+                  <DatePicker nodeOrientation="LEFT_TO_RIGHT" />
+              </items>
+            </ToolBar>
+            <GridPane fx:id="scheduleGridPane" gridLinesVisible="true" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Label" GridPane.rowIndex="1" />
+                  <Label text="Label" GridPane.rowIndex="2" />
+                  <Label text="Label" GridPane.rowIndex="3" />
+                  <Label text="Label" GridPane.rowIndex="4" />
+                  <Label text="Label" GridPane.rowIndex="5" />
+                  <Label text="Label" GridPane.rowIndex="6" />
+                  <Label text="Label" GridPane.rowIndex="7" />
+                  <Label text="Label" GridPane.rowIndex="8" />
+                  <Label text="Label" GridPane.rowIndex="9" />
+                  <Label text="Label" GridPane.rowIndex="10" />
+                  <Label text="Label" GridPane.rowIndex="11" />
+                  <Label text="Label" GridPane.rowIndex="12" />
+                  <Label text="Label" GridPane.rowIndex="13" />
+                  <Label text="Monday" GridPane.columnIndex="1" />
+                  <Label text="Label" GridPane.columnIndex="2" />
+                  <Label text="Label" GridPane.columnIndex="3" />
+                  <Label text="Label" GridPane.columnIndex="4" />
+                  <Label text="Label" GridPane.columnIndex="5" />
+               </children>
+            </GridPane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <right>
+      <VBox prefHeight="700.0" prefWidth="215.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button mnemonicParsing="false" text="Button" />
+              </items>
+            </ToolBar>
+            <Button mnemonicParsing="false" text="Add Event">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <TextField fx:id="searchCourse" onAction="#loadAllCourses" promptText="Add Course">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <ListView fx:id="availableCourses" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ListView>
+            <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#addSelectedCourse" text="Add" />
+            <ListView fx:id="selectedCoursesListView" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ListView>
+            <Button fx:id="removeCourseButton" mnemonicParsing="false" onAction="#removeSelectedCourse" text="Remove" />
+            <TabPane fx:id="sectionTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+</BorderPane>

@@ -8,7 +8,7 @@ public class DatabaseConnection {
 
     public Connection getConnection() {
         Connection conn;
-        String url = "jdbc:mysql://127.0.0.1:3306/COMP1020";
+        String url = "jdbc:mysql://127.0.0.1:3306/schedule";
         String username = "root";
         String password = "VuphuC2462001.";
 
