@@ -9,114 +9,135 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WeekController">
-   <center>
-      <VBox prefHeight="700.0" prefWidth="853.0" BorderPane.alignment="CENTER">
-         <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                  <ComboBox prefWidth="150.0" />
-                  <Label text="5 Courses 18 Credits" />
-                  <DatePicker nodeOrientation="LEFT_TO_RIGHT" />
-              </items>
-            </ToolBar>
-            <GridPane fx:id="scheduleGridPane" gridLinesVisible="true" VBox.vgrow="ALWAYS">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-               <children>
-                  <Label text="Label" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.rowIndex="4" />
-                  <Label text="Label" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.rowIndex="6" />
-                  <Label text="Label" GridPane.rowIndex="7" />
-                  <Label text="Label" GridPane.rowIndex="8" />
-                  <Label text="Label" GridPane.rowIndex="9" />
-                  <Label text="Label" GridPane.rowIndex="10" />
-                  <Label text="Label" GridPane.rowIndex="11" />
-                  <Label text="Label" GridPane.rowIndex="12" />
-                  <Label text="Label" GridPane.rowIndex="13" />
-                  <Label text="Monday" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="3" />
-                  <Label text="Label" GridPane.columnIndex="4" />
-                  <Label text="Label" GridPane.columnIndex="5" />
-               </children>
-            </GridPane>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </VBox>
-   </center>
-   <right>
-      <VBox prefHeight="700.0" prefWidth="215.0" BorderPane.alignment="CENTER">
-         <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button mnemonicParsing="false" text="Button" />
-              </items>
-            </ToolBar>
-            <Button mnemonicParsing="false" text="Add Event">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <TextField fx:id="searchCourse" onAction="#loadAllCourses" promptText="Add Course">
-               <VBox.margin>
-                  <Insets left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <ListView fx:id="availableCourses" prefHeight="200.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </ListView>
-            <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#addSelectedCourse" text="Add" />
-            <ListView fx:id="selectedCoursesListView" prefHeight="200.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </ListView>
-            <Button fx:id="removeCourseButton" mnemonicParsing="false" onAction="#removeSelectedCourse" text="Remove" />
-            <TabPane fx:id="sectionTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
-            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#addSelectedSections" text="Submit" />
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </BorderPane.margin>
-      </VBox>
-   </right>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #ECF0F1;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.WeekController">
+    <center>
+        <Pane BorderPane.alignment="CENTER">
+            <children>
+                <GridPane fx:id="grid" gridLinesVisible="true" layoutX="6.0" layoutY="7.0" prefHeight="626.0" prefWidth="1049.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                  <Label text="12 AM" GridPane.rowIndex="1" />
+                  <Label text="02 PM" GridPane.rowIndex="15" />
+                  <Label text="03 PM" GridPane.rowIndex="16" />
+                        <Label GridPane.rowIndex="1" />
+                  <Label text="04 PM" GridPane.rowIndex="17" />
+                  <Label text="09 PM" GridPane.rowIndex="22" />
+                  <Label text="05 PM" GridPane.rowIndex="18" />
+                  <Label text="06 PM" GridPane.rowIndex="19" />
+                  <Label text="07 PM" GridPane.rowIndex="20" />
+                  <Label text="08 PM" GridPane.rowIndex="21" />
+                        <Label text="01 AM" GridPane.rowIndex="2" />
+                        <Label text="02 AM" GridPane.rowIndex="3" />
+                        <Label text="03 AM" GridPane.rowIndex="4" />
+                        <Label text="04 AM" GridPane.rowIndex="5" />
+                        <Label text="05 AM" GridPane.rowIndex="6" />
+                        <Label text="06 AM" GridPane.rowIndex="7" />
+                        <Label text="07 AM" GridPane.rowIndex="8" />
+                        <Label text="08 AM" GridPane.rowIndex="9" />
+                        <Label text="09 AM" GridPane.rowIndex="10" />
+                        <Label text="10 AM" GridPane.rowIndex="11" />
+                        <Label text="11 AM" GridPane.rowIndex="12" />
+                        <Label text="12 PM" GridPane.rowIndex="13" />
+                        <Label text="Monday" GridPane.columnIndex="1" />
+                        <Label text="Tuesday" GridPane.columnIndex="2" />
+                        <Label text="Wednesday" GridPane.columnIndex="3" />
+                        <Label text="Thursday" GridPane.columnIndex="4" />
+                        <Label text="Friday" GridPane.columnIndex="5" />
+                  <Label text="Saturday" GridPane.columnIndex="6" />
+                  <Label text="Sunday" GridPane.columnIndex="7" />
+                  <Label text="10 PM" GridPane.rowIndex="23" />
+                  <Label text="01 PM" GridPane.rowIndex="14" />
+                  <Label text="11 PM" GridPane.rowIndex="24" />
+                    </children>
+                </GridPane>
+                <AnchorPane fx:id="gp" layoutX="6.0" layoutY="6.0" prefHeight="646.0" prefWidth="1054.0" />
+            </children>
+        </Pane>
+    </center>
+    <top>
+        <HBox prefHeight="20.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox />
+                <ToolBar prefHeight="40.0" prefWidth="1050.0">
+                    <items>
+                        <ComboBox prefWidth="150.0" />
+                        <Label fx:id="numCourses" text="0 Course(s)" />
+                  <Label fx:id="numCredits" text="0 Credit(s)" />
+                        <DatePicker nodeOrientation="LEFT_TO_RIGHT" />
+                    </items>
+                </ToolBar>
+                <ToolBar prefHeight="35.0" prefWidth="228.0">
+                    <items>
+                        <Button mnemonicParsing="false" prefWidth="55.0" text="Button" />
+                    </items>
+                </ToolBar>
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefHeight="443.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <VBox prefHeight="751.0" prefWidth="215.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" text="Add Event">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
+                <TextField fx:id="searchCourse" onAction="#loadAllCourses" promptText="Add Course" />
+                <ListView fx:id="availableCourses" prefHeight="200.0" prefWidth="200.0" />
+                <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#addSelectedCourse" text="Add" />
+                <ListView fx:id="selectedCoursesListView" prefHeight="200.0" prefWidth="200.0" />
+                <Button fx:id="removeCourseButton" mnemonicParsing="false" onAction="#removeSelectedCourse" text="Remove" />
+                <TabPane fx:id="sectionTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+                <Button fx:id="submitButton" mnemonicParsing="false" onAction="#addSelectedSections" text="Submit" />
+            </children>
+        </VBox>
+    </right>
 </BorderPane>

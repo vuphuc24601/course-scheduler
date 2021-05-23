@@ -1,7 +1,12 @@
 package models;
 
 public class Section{
-    String description;
+    /**
+     *
+     * @params startTime : String hh:mm:ss 14:30:00
+     *
+     * */
+    public String description;
     String startTime;
     String endTime;
     int day;
@@ -59,6 +64,6 @@ public class Section{
 
     @Override
     public String toString() {
-        return String.format("%s | %s %s - %s", description, days[this.getDay()],startTime, endTime);
+        return String.format("%s | %s %s - %s", description, days[this.getDay()],startTime.substring(0, 5), endTime.substring(0, 5));
     }
 }

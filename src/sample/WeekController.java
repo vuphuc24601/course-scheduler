@@ -9,9 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import models.Course;
 import models.Schedule;
 import models.Section;
@@ -52,6 +53,12 @@ public class WeekController implements Initializable {
 
     @FXML
     private Button submitButton;
+
+    @FXML
+    private Label numCourses;
+
+    @FXML
+    private Label numCredits;
 
 
     // List of all courses for current semester
@@ -99,6 +106,18 @@ public class WeekController implements Initializable {
         });
     }
 
+    public void displayCoursesAndCredits() {
+        String numCourse = String.valueOf(selectedCourses.size());
+        numCourses.setText(numCourse + " Course(s)");
+        int credit = 0;
+        for (Course c:selectedCourses) {
+            credit += c.getCredit();
+        }
+        String numCredit = String.valueOf(credit);
+        numCredits.setText(numCredit + " Credit(s)");
+    }
+
+
     public void loadHistory() {
         List<Section> sections = new ArrayList<>();
         try {
@@ -124,6 +143,7 @@ public class WeekController implements Initializable {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
+        displayCoursesAndCredits();
     }
 
 
@@ -266,9 +286,12 @@ public class WeekController implements Initializable {
             content.getChildren().add(sectionEntry);
         });
         pane.setContent(content);
-        tab.setContent(pane);
+
+            tab.setContent(pane);
         this.sectionTabPane.getTabs().add(tab);
     }
+
+    public LinkedHashMap <String, List<Section>> selectedSections;
 
     public LinkedHashMap<String, List<Section>> addSelectedSections(ActionEvent _event) {
         Section section;
@@ -293,6 +316,9 @@ public class WeekController implements Initializable {
             }
             sections.put(course.getCourseId(), selected);
         }
+
+        // display num of course and credit
+        displayCoursesAndCredits();
 
         // Add to database
 
@@ -324,8 +350,148 @@ public class WeekController implements Initializable {
             System.err.println(e.getMessage());
         }
 
-
+        selectedSections = sections;
+        courseDisplayer();
+        weekViewMainEventDisplay ();
+        test();// alo hong nghe ha :<
         return sections;
+    }
+
+    void courseDisplayer (){
+        for (Map.Entry<String,List<Section>> entry : selectedSections.entrySet()){
+            String id = entry.getKey();
+            for (Section i : entry.getValue()){
+                String Stime[] = i.getStartTime().split(":");
+                String Etime[] = i.getEndTime().split(":");
+                int day =  i.getDay()- 1;
+                addEvent (MonthView.tinder(day,1,2021),1,2021,Integer.parseInt(Stime[0]),Integer.parseInt(Stime[1]),23  ,6,2021,Integer.parseInt(Etime[1]),Integer.parseInt(Etime[2]),i.getDescription(),false,true,Color.RED);
+            }
+        }
+    }
+// --------------------------------------------------------------------------
+
+    Date firstDate = new Date (16,5,2021,0,0) ; // denote the first day of the week;
+    Date endDate = new Date (23,5,2021,0,0);
+    Double Gwidth  = 143.0;
+    Double Gheight =26.375;
+    @FXML
+    AnchorPane gp;
+    @FXML
+    GridPane grid;
+
+
+    @FXML
+    void test(){
+        drawEvent(53.5,13,25,143,Color.RED,"ga`");
+        displayEvent(1,5,30,7,45,Color.BLUE,"vjp");
+    }
+
+
+
+
+
+    @FXML
+    void drawEvent(double x, double y, double height, double width, Color color,String title){
+        Text displayTitle = new Text(title);
+        StackPane SP = new StackPane();
+        Rectangle rect = new Rectangle();
+
+        SP.setPrefSize(width,height);
+        SP.setLayoutX(x);
+        SP.setLayoutY(y);
+        SP.setAlignment(Pos.CENTER);
+        rect.setX(x);
+        rect.setY(y);
+        rect.setHeight(height);
+        rect.setWidth (width);
+        rect.setFill(color);
+        SP.getChildren().addAll(rect,displayTitle);
+        gp.getChildren().add(SP);
+    }
+
+    Double [] gridPaneToPixel(int row ,int column){
+        Double [] pix;
+        double firstCollumnX = 53.5;
+        double firstRowy     = 13 ;
+        pix = new Double[]{firstCollumnX + (column - 1) * Gwidth, firstRowy + (row - 1) * Gheight};
+        return pix ;
+    }
+
+    @FXML
+       void displayEvent(int dayOfTheWeek, int Shour , int Sminute, int Ehour,int Eminute,Color color, String title){
+//        Node Scell = getNodeByRowColumnIndex(dayOfTheWeek,Shour);
+//        Node Ecell = getNodeByRowColumnIndex(dayOfTheWeek,Ehour);
+        double startingY = gridPaneToPixel(Shour,dayOfTheWeek)[1] + Gheight*(Sminute)/60 ;
+        double endingY = gridPaneToPixel(Ehour,dayOfTheWeek)[1] + (Gheight*Eminute)/60;
+        if (Date.compareTime(new int []{Shour,Sminute},new int []{Ehour,Eminute}) == 1){
+            displayEvent(dayOfTheWeek, Shour , Sminute, 25,00,color, title);
+            if (dayOfTheWeek <=6)
+                    displayEvent(dayOfTheWeek+1, 1, 00, Ehour,Eminute,color, title);
+        }
+        else
+        drawEvent (gridPaneToPixel(Shour,dayOfTheWeek)[0],startingY,endingY-startingY,Gwidth,color,title);
+    }
+
+   static void addEvent (int Sdd,int Smm,int Syy,int Shour,int Sminute, int Edd,int Emm,int Eyy,int Ehour,int Eminute, String title, boolean Day, boolean Date, Color color){
+        /**
+         * @param Sdate : String
+         *        starting date  and time of the event
+         * @param Edate : String
+         *        Ending date and time of the event
+         * @param Syy  : int
+         *             denote starting year
+         * @param Smm  : int
+         *             denote starting month
+         * @param Sdd  :int
+         *             dentoe starting day
+         * @param Sdate : String
+         *        starting date  and time of the event
+         * @param Eyy  : int
+         *             denote end year
+         * @param Emm  : int
+         *             denote end month
+         * @param Edd  :int
+         *             dentoe end day
+         * BE NOTED : Format for Sdate and E date
+         *            dd mm yy hour minute
+         *  for example : 22/05/2021 2:03Pm  =>  22 5 2021 14 3
+         * @param title : String
+         *              Title of the event
+         * @param day   : boolean
+         *              check if the event recurr everyday
+         * @param date  : boolean
+         *              check if the event  recurr on this date every week
+         *
+         * Event parameters : Date SD,Date ED, String title,boolean Day,Boolean Date
+         */
+        Event eve = new Event (new Date(Sdd,Smm,Syy,Shour,Sminute), new Date(Edd,Emm,Eyy,Ehour,Eminute),title,Day,Date,color);
+        if (!eve.isOverlapped())
+            Event.EventManager.add (eve);
+    }
+
+    @FXML
+    void weekViewMainEventDisplay (){
+        Date crrDate = firstDate;
+        for (int i = 0 ; i <=6;i++)
+        {
+            for (sample.Event eve : Event.EventManager){
+                if (Date.isDuring(eve.startDate,eve.endDate,crrDate))
+                  //condition to display
+                      if  (eve.everyday){
+                          displayEvent(MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]),eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                      }
+                      else if (eve.everyDate&& MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]) == crrDate.Sdate[0])
+                      {
+                          displayEvent(MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]),eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                      }
+                      else {
+                          displayEvent(MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]),eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                      }
+
+            }
+            crrDate =  sample.MonthView.nextDate(crrDate);
+
+        }
     }
 
 
