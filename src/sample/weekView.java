@@ -13,32 +13,35 @@ import static sample.monthView.crrYear;
 public class weekView   {
     Date firstDate ; // denote the first day of the week;
     Date endDate;
+    int Gwidth= 100;
+    int Gheight =63;
     @FXML
     AnchorPane gp;
     @FXML
     GridPane grid;
 
-    @FXML
-    Pane testP;
+
     @FXML
     void test(){
-        displayEvent(1,1,20,2,30,Color.RED);
+        //drawEvent(99,30,63,100,Color.RED);
+        displayEvent(1,1,30,2,30,Color.BLUE);
     }
-    @FXML
-    public Node getNodeByRowColumnIndex (final int row, final int column) {
-        Node result = null;
-   //     ObservableList<Node> childrens = grid.getChildren();
 
-        for (Node node : grid.getChildren()) {
-            System.out.println(node);
-            if(grid.getRowIndex(node) == row && grid.getColumnIndex(node) == column) {
-                result = node;
-                break;
-            }
-        }
+//    public Node getNodeByRowColumnIndex (final int row, final int column) {
+//        Node result = null;
+//   //     ObservableList<Node> childrens = grid.getChildren();
+//
+//        for (Node node : grid.getChildren()) {
+//
+//            if(grid.getRowIndex(node) == row && grid.getColumnIndex(node) == column) {
+//                result = node;
+//                break;
+//            }
+//        }
+//
+//        return result;
+//    }
 
-        return result;
-    }
 
 
     @FXML
@@ -52,13 +55,21 @@ public class weekView   {
         rect.setFill(color);
         gp.getChildren().add(rect);
     }
+    Double [] gridPaneToPixel(int row ,int column){
+        Double [] pix;
+        double firstCollumnX = 99;
+        double firstRowy     = 30 ;
+        pix = new Double[]{firstCollumnX + (column - 1) * Gwidth, firstRowy + (row - 1) * Gheight};
+        return pix ;
+    }
+
     @FXML
     void displayEvent(int dayOfTheWeek, int Shour , int Sminute, int Ehour,int Eminute,Color color){
-        Node Scell = getNodeByRowColumnIndex(dayOfTheWeek,Shour);
-        Node Ecell = getNodeByRowColumnIndex(dayOfTheWeek,Ehour);
-        double startingY = Scell.getTranslateY()+ Scell.getScaleY()*((60- Sminute)*100)/60;
-        double endingy = Ecell.getTranslateY() - Ecell.getScaleY() *(Eminute)*100/60;
-        drawEvent (Scell.getTranslateX(),startingY,startingY-endingy,200,color);
+//        Node Scell = getNodeByRowColumnIndex(dayOfTheWeek,Shour);
+//        Node Ecell = getNodeByRowColumnIndex(dayOfTheWeek,Ehour);
+        double startingY = gridPaneToPixel(Shour,dayOfTheWeek)[1] + Gheight*(Sminute)/60 ;
+        double endingY = gridPaneToPixel(Ehour,dayOfTheWeek)[1] + (Gheight*Eminute)/60;
+        drawEvent (gridPaneToPixel(dayOfTheWeek,Shour)[0],startingY,endingY-startingY,Gwidth,color);
     }
 
 
