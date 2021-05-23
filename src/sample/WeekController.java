@@ -118,6 +118,11 @@ public class WeekController implements Initializable {
     public void addSelectedCourse(ActionEvent _event) {
         if (this.availableCourses.getFocusModel().getFocusedItem() != null) {
             String courseId = this.availableCourses.getFocusModel().getFocusedItem().toString().split(":")[0];
+            for (Course c:selectedCourses) {
+                if (courseId.equals(c.getCourseId())) {
+                    return;
+                }
+            }
 
             try {
                 //Statement st = connectDB.createStatement();
@@ -258,7 +263,6 @@ public class WeekController implements Initializable {
             }
             sections.put(course.getCourseId(), selected);
         }
-
         return sections;
     }
 
