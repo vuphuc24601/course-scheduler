@@ -88,6 +88,7 @@ public class WeekController implements Initializable {
         }
 
         Schedule schedule = new Schedule("Spring 2021");
+        loadHistory();
 
 
     }
@@ -96,6 +97,33 @@ public class WeekController implements Initializable {
         Arrays.asList(this.addCourseButton, this.removeCourseButton).forEach((button) -> {
             button.defaultButtonProperty().bind(button.focusedProperty());
         });
+    }
+
+    public void loadHistory() {
+        List<Section> sections = new ArrayList<>();
+        try {
+            String query = "SELECT DISTINCT(c.course_id), c.title, c.credit, c.description, c.color\n" +
+                    "FROM course c\n" +
+                    "JOIN schedule_1 cd\n" +
+                    "WHERE (c.course_id = cd.course_id);";
+            PreparedStatement pst = connectDB.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                String courseId = rs.getString("course_id");
+                String title = rs.getString("title");
+                int credit = rs.getInt("credit");
+                String description = rs.getString("description");
+                Course newCourse = new Course(courseId, title, description, credit);
+                String displayedCourse = String.format("%s: %s\n%d Credit(s)", courseId, title, credit);
+                this.selectedCoursesListView.getItems().add(displayedCourse);
+                this.createNewTab(newCourse);
+                selectedCourses.add(newCourse);
+            }
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
     }
 
 
@@ -180,9 +208,6 @@ public class WeekController implements Initializable {
             if (this.focusedCourse != null && this.focusedCourse.getCourseId().equalsIgnoreCase(courseToRemove)) {
                 this.sectionListView.getItems().clear();
             }
-
-            //WeekController.currentSemester.generateSchedules();
-            //this.regenerateSchedules();
         }
     }
 
