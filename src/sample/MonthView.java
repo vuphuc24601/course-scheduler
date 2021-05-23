@@ -42,7 +42,7 @@ public class monthView {
         displayCurrentMonth();
     }
 
-    public int monthLimit;
+    public static int monthLimit;
 
     {
         this.crrMonth = 5;
@@ -218,7 +218,13 @@ public class monthView {
         return 0;
     }
 
-    sample.Date nextDate(Date i) {
+    static int findMonthLimit(int month, int year){
+        int res = numberOfDayOfMonths[month];
+        if (month == 2) res += isLeapYear(year);
+        return res ;
+    }
+
+    static sample.Date nextDate(Date i) {
         Date res = new Date(0, 0, 0, i.Sdate[3], i.Stime[4]);
         if (i.Sdate[0] == monthLimit) {
             res.Sdate[0] = 1;
@@ -238,13 +244,8 @@ public class monthView {
         return res ;
     }
 
-    int findMonthLimit (int month,int year){
-        int res = numberOfDayOfMonths[month];
-        if (month == 2) res += isLeapYear(year);
-        return res ;
-    }
 
-    sample.Date prevDate(Date i) {
+    static sample.Date prevDate(Date i) {
         Date res = new Date(0, 0, 0, i.Sdate[3], i.Stime[4]);
         if (i.Sdate[0] == 1) {
 
