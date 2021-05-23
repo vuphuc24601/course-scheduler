@@ -49,6 +49,14 @@ public class Section{
         this.duration = duration;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return String.format("%s | %s %s - %s", description, days[this.getDay()],startTime, endTime);

@@ -98,6 +98,8 @@ public class WeekController implements Initializable {
         });
     }
 
+
+
     public void loadAllCourses() {
         ObservableList<String> options = FXCollections.observableArrayList(allCourse);
         this.courseList = new FilteredList<>(options, s -> true);
@@ -113,6 +115,8 @@ public class WeekController implements Initializable {
             }
         });
     }
+
+
 
 
     public void addSelectedCourse(ActionEvent _event) {
@@ -251,6 +255,7 @@ public class WeekController implements Initializable {
         for (int i=0; i<this.sectionTabPane.getTabs().size();i++) {
             tab = this.sectionTabPane.getTabs().get(i);
             course = selectedCourses.get(i);
+            System.out.println(course.getCourseId());
             List<Section> selected = new ArrayList<>();
             VBox container = (VBox) ((ScrollPane) tab.getContent()).getContent();
             // iterate each section in a tab
@@ -263,6 +268,38 @@ public class WeekController implements Initializable {
             }
             sections.put(course.getCourseId(), selected);
         }
+
+        // Add to database
+
+
+
+
+        try {
+            Statement st = connectDB.createStatement();
+            String query = "TRUNCATE TABLE schedule.schedule_1;";
+            st.executeUpdate(query);
+
+            for (Map.Entry<String, List<Section>> entry : sections.entrySet()) {
+                for (Section s : entry.getValue()) {
+                    String queryInsert = "INSERT INTO schedule.schedule_1 VALUES\n" +
+                            "(NULL, ?, ?, ?, ?, ?)";
+                    PreparedStatement pst = connectDB.prepareStatement(queryInsert);
+                    pst.setString(1, entry.getKey());
+                    pst.setString(2, s.getStartTime());
+                    System.out.println(s.getStartTime());
+                    pst.setString(3, s.getEndTime());
+                    pst.setInt(4, s.getDay());
+                    pst.setString(5, s.getDescription());
+                    System.out.println(s.getDescription());
+                    pst.executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+
         return sections;
     }
 
