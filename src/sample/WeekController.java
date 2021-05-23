@@ -13,10 +13,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import models.Course;
+import models.Schedule;
+import models.Section;
 import models.Semester;
 import sql.DatabaseConnection;
 
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,6 +50,10 @@ public class WeekController implements Initializable {
     @FXML
     private TabPane sectionTabPane;
 
+    @FXML
+    private Button submitButton;
+
+
     // List of all courses for current semester
     private FilteredList<String> courseList;
 
@@ -55,7 +62,7 @@ public class WeekController implements Initializable {
     static Semester currentSemester = new Semester("Spring 2021");
 
     private ArrayList<String> allCourse = new ArrayList<>();
-    private HashSet<String> selectedCourses = new HashSet<>();
+    private ArrayList<Course> selectedCourses = new ArrayList<>();
 
     static DatabaseConnection connectNow = new DatabaseConnection();
     static Connection connectDB = connectNow.getConnection();
@@ -79,6 +86,9 @@ public class WeekController implements Initializable {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
+
+        Schedule schedule = new Schedule("Spring 2021");
+
 
     }
 
@@ -126,6 +136,7 @@ public class WeekController implements Initializable {
                     String displayedCourse = String.format("%s: %s\n%d Credit(s)", courseId, title, credit);
                     this.selectedCoursesListView.getItems().add(displayedCourse);
                     this.createNewTab(newCourse);
+                    selectedCourses.add(newCourse);
 
 
                 }
@@ -147,6 +158,14 @@ public class WeekController implements Initializable {
             System.out.println(courseToRemove);
             this.selectedCoursesListView.getItems().remove(courseToRemove);
             System.out.println(courseToRemove);
+
+            for (Course c:selectedCourses) {
+                System.out.println(c);
+            }
+            selectedCourses.remove(ind);
+            for (Course c:selectedCourses) {
+                System.out.println(c);
+            }
 
             // Clears the section listview if the focus is on the course to be removed.
             if (this.focusedCourse != null && this.focusedCourse.getCourseId().equalsIgnoreCase(courseToRemove)) {
@@ -189,7 +208,6 @@ public class WeekController implements Initializable {
                 this.createNewTab(c);
             }
         }
-
     }
 
     public void createNewTab(Course course) {
@@ -216,6 +234,32 @@ public class WeekController implements Initializable {
         pane.setContent(content);
         tab.setContent(pane);
         this.sectionTabPane.getTabs().add(tab);
+    }
+
+    public LinkedHashMap<String, List<Section>> addSelectedSections(ActionEvent _event) {
+        Section section;
+        Tab tab;
+        Course course;
+        LinkedHashMap<String, List<Section>> sections = new LinkedHashMap<>();
+
+        // iterate each tab
+        for (int i=0; i<this.sectionTabPane.getTabs().size();i++) {
+            tab = this.sectionTabPane.getTabs().get(i);
+            course = selectedCourses.get(i);
+            List<Section> selected = new ArrayList<>();
+            VBox container = (VBox) ((ScrollPane) tab.getContent()).getContent();
+            // iterate each section in a tab
+            for (int j=0; j<container.getChildren().size(); j++) {
+                VBox entry = (VBox) container.getChildren().get(j);
+                CheckBox checkBox = (CheckBox) entry.getChildren().get(0);
+                if (checkBox.isSelected()) {
+                    selected.add(course.getSections().get(j));
+                }
+            }
+            sections.put(course.getCourseId(), selected);
+        }
+
+        return sections;
     }
 
 

@@ -96,12 +96,12 @@
             </Button>
             <TextField fx:id="searchCourse" onAction="#loadAllCourses" promptText="Add Course">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextField>
             <ListView fx:id="availableCourses" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
             </ListView>
             <Button fx:id="addCourseButton" mnemonicParsing="false" onAction="#addSelectedCourse" text="Add" />
@@ -112,6 +112,7 @@
             </ListView>
             <Button fx:id="removeCourseButton" mnemonicParsing="false" onAction="#removeSelectedCourse" text="Remove" />
             <TabPane fx:id="sectionTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#addSelectedSections" text="Submit" />
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" />
