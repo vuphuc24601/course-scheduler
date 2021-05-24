@@ -53,7 +53,7 @@ public class Date {
         for (int i = 0 ; i < 2; i++)
             if (th[i] < o[i])
                 return -1;
-            else if (th[i] < o[i] )
+            else if (th[i] > o[i] )
                 return 1;
         return 0 ;
     }
@@ -62,5 +62,10 @@ public class Date {
         if (ck.Sdate[1] < start.Sdate[1] || ck.Sdate[1] > end.Sdate[1]) return false;
         if (ck.Sdate[0] < start.Sdate[0] || ck.Sdate[1]  > end.Sdate[1]) return false ;
         return true;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%d/%d/%d", this.Sdate[0], this.Sdate[1], this.Sdate[2]);
     }
 }

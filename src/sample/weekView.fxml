@@ -108,12 +108,15 @@
                         <Label fx:id="numCourses" text="0 Course(s)" />
                   <Label fx:id="numCredits" text="0 Credit(s)" />
                         <DatePicker nodeOrientation="LEFT_TO_RIGHT" />
+                  <Button fx:id="prevButton" mnemonicParsing="false" onAction="#prevWeek" text="Prev" />
+                  <Label fx:id="dateLabel" text="24/5/2021 - 30/5/2021" />
+                  <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextWeek" text="Next" />
                     </items>
                 </ToolBar>
                 <ToolBar prefHeight="35.0" prefWidth="228.0">
-                    <items>
-                        <Button mnemonicParsing="false" prefWidth="55.0" text="Button" />
-                    </items>
+               <items>
+                  <Label fx:id="errorLabel" textFill="RED" />
+               </items>
                 </ToolBar>
             </children>
         </HBox>

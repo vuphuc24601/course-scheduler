@@ -29,10 +29,8 @@ public class Event{
     String title;
     boolean everyday, everyDate ;
     Color color;
-    public static ArrayList<Event> EventManager;
-    {
-        EventManager = new ArrayList<>();
-    }
+    public static ArrayList<Event> EventManager= new ArrayList<>();
+
 
     Event (Date SD,Date ED, String title,boolean Day,Boolean Date, Color color){
 

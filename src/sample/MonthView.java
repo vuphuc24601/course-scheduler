@@ -249,7 +249,7 @@ public class MonthView {
         return res ;
     }
 
-    sample.Date prevDate(sample.Date i) {
+    static sample.Date prevDate(sample.Date i) {
         sample.Date res = new sample.Date(0, 0, 0, i.Stime[0], i.Stime[1]);
         if (i.Sdate[0] == 1) {
 
@@ -271,7 +271,52 @@ public class MonthView {
         }
         return res ;
     }
+
+    static sample.Date nextWeek(sample.Date i) {
+        sample.Date res = new sample.Date(0, 0, 0, i.Stime[0], i.Stime[1]);
+        if (i.Sdate[0] + 7 > findMonthLimit(i.Sdate[1],i.Sdate[2])) {
+            res.Sdate[0] = 7 - findMonthLimit(i.Sdate[1],i.Sdate[2]) + i.Sdate[0];
+            if (i.Sdate[1] == 12) {
+                res.Sdate[1] = 1;
+                res.Sdate[2] = i.Sdate[2] + 1;
+            } else {
+                res.Sdate[1] = i.Sdate[1] + 1;
+                res.Sdate[2] = i.Sdate[2];
+            }
+        }
+        else {
+            res.Sdate[0] = i.Sdate[0] +7 ;
+            res.Sdate[1] = i.Sdate[1] ;
+            res.Sdate[2] = i.Sdate[2];
+        }
+        return res ;
+    }
+
+    static sample.Date prevWeek(sample.Date i) {
+        sample.Date res = new sample.Date(0, 0, 0, i.Stime[0], i.Stime[1]);
+        if (i.Sdate[0] <= 7) {
+
+            if (i.Sdate[1] == 1) {
+                res.Sdate[0] = findMonthLimit(i.Sdate[1]-1,i.Sdate[2]) - 7 + res.Sdate[0];
+                res.Sdate[1] = 12;
+                res.Sdate[2] = i.Sdate[2] - 1;
+            } else {
+                res.Sdate[0] =  findMonthLimit(i.Sdate[1]-1,i.Sdate[2]) - 7 + res.Sdate[0];
+                res.Sdate[1] = i.Sdate[1] - 1;
+                res.Sdate[2] = i.Sdate[2];
+            }
+
+        }
+        else {
+            res.Sdate[0] = i.Sdate[0] -7;
+            res.Sdate[1] = i.Sdate[1];
+            res.Sdate[2] = i.Sdate[2];
+        }
+        return res ;
+    }
 }
+
+    
 
 
 

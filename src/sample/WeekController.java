@@ -60,6 +60,18 @@ public class WeekController implements Initializable {
     @FXML
     private Label numCredits;
 
+    @FXML
+    private Button prevButton;
+
+    @FXML
+    private Label dateLabel;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
+    private Label errorLabel;
+
 
     // List of all courses for current semester
     private FilteredList<String> courseList;
@@ -162,6 +174,44 @@ public class WeekController implements Initializable {
                 this.courseList.setPredicate(s -> s.toLowerCase().contains(filter));
             }
         });
+    }
+
+    public void nextWeek(ActionEvent _event) {
+        System.out.println("next");
+        String[] dates = dateLabel.getText().split("-");
+        String startDate = dates[0].trim();
+        String endDate = dates[1].trim();
+
+        int startDay = Integer.parseInt(startDate.split("/")[0]);
+        int startMonth = Integer.parseInt(startDate.split("/")[1]);
+        int startYear = Integer.parseInt(startDate.split("/")[2]);
+
+        int endDay = Integer.parseInt(endDate.split("/")[0]);
+        int endMonth = Integer.parseInt(endDate.split("/")[1]);
+        int endYear = Integer.parseInt(endDate.split("/")[2]);
+
+        Date nextStartDate = new Date(startDay, startMonth, startYear, 0, 0);
+        Date nextEndDate = new Date(endDay, endMonth, endYear, 0, 0);
+        dateLabel.setText(MonthView.nextWeek(nextStartDate).toString() + " - " + MonthView.nextWeek(nextEndDate).toString());
+    }
+
+    public void prevWeek(ActionEvent _event) {
+        System.out.println("prev");
+        String[] dates = dateLabel.getText().split("-");
+        String startDate = dates[0].trim();
+        String endDate = dates[1].trim();
+
+        int startDay = Integer.parseInt(startDate.split("/")[0]);
+        int startMonth = Integer.parseInt(startDate.split("/")[1]);
+        int startYear = Integer.parseInt(startDate.split("/")[2]);
+
+        int endDay = Integer.parseInt(endDate.split("/")[0]);
+        int endMonth = Integer.parseInt(endDate.split("/")[1]);
+        int endYear = Integer.parseInt(endDate.split("/")[2]);
+
+        Date prevStartDate = new Date(startDay, startMonth, startYear, 0, 0);
+        Date prevEndDate = new Date(endDay, endMonth, endYear, 0, 0);
+        dateLabel.setText(MonthView.prevWeek(prevStartDate).toString() + " - " + MonthView.prevWeek(prevEndDate).toString());
     }
 
 
@@ -298,6 +348,8 @@ public class WeekController implements Initializable {
         Tab tab;
         Course course;
         LinkedHashMap<String, List<Section>> sections = new LinkedHashMap<>();
+        gp.getChildren().clear();
+        errorLabel.setText("");
 
         // iterate each tab
         for (int i=0; i<this.sectionTabPane.getTabs().size();i++) {
@@ -351,9 +403,11 @@ public class WeekController implements Initializable {
         }
 
         selectedSections = sections;
+
+        Event.EventManager.clear();
         courseDisplayer();
         weekViewMainEventDisplay ();
-        test();
+        //test();
         return sections;
     }
 
@@ -364,7 +418,7 @@ public class WeekController implements Initializable {
                 String Stime[] = i.getStartTime().split(":");
                 String Etime[] = i.getEndTime().split(":");
                 int day =  i.getDay()-1;
-                addEvent (MonthView.tinder(day,1,2021),1,2021,Integer.parseInt(Stime[0]),Integer.parseInt(Stime[1]),23  ,6,2021,Integer.parseInt(Etime[0]),Integer.parseInt(Etime[1]),i.getDescription(),false,true,Color.AQUA);
+                addEvent (MonthView.tinder(day,1,2021),1,2021,Integer.parseInt(Stime[0]),Integer.parseInt(Stime[1]),23  ,6,2021,Integer.parseInt(Etime[0]),Integer.parseInt(Etime[1]),id+"-"+i.getDescription(),false,true,colorSetter(id));
             }
         }
     }
@@ -386,8 +440,21 @@ public class WeekController implements Initializable {
         displayEvent(1,11,00,13,15,Color.BLUE,"vjp");
     }
 
+    Color pencilCase[] = new Color[]{Color.AQUA,Color.BLUE,Color.FORESTGREEN,Color.FIREBRICK,Color.GOLD,Color.GREENYELLOW,Color.LEMONCHIFFON,Color.LIGHTPINK,Color.MAGENTA,Color.PEACHPUFF,Color.ORANGE,Color.SALMON,Color.SEAGREEN,Color.PLUM};
+    Map <Color,String> colorTaken = new HashMap <>();
+    Map <String,Color> hasColor = new HashMap<>();
 
-
+    Color colorSetter (String id){
+        if (hasColor.get(id)  != null) return hasColor.get(id);
+        for (Color i : pencilCase)
+        if (colorTaken.get(i) == null)
+        {
+            colorTaken.put(i,id);
+            hasColor.put(id,i);
+            return i;
+        }
+        return Color.BLUEVIOLET;
+    }
 
 
     @FXML
@@ -421,8 +488,11 @@ public class WeekController implements Initializable {
        void displayEvent(int dayOfTheWeek, int Shour , int Sminute, int Ehour,int Eminute,Color color, String title){
 //        Node Scell = getNodeByRowColumnIndex(dayOfTheWeek,Shour);
 //        Node Ecell = getNodeByRowColumnIndex(dayOfTheWeek,Ehour);
+         if (dayOfTheWeek == 0 ) dayOfTheWeek = 7;
+
         double startingY = gridPaneToPixel(Shour,dayOfTheWeek)[1] + Gheight*(Sminute)/60 ;
         double endingY = gridPaneToPixel(Ehour,dayOfTheWeek)[1] + (Gheight*Eminute)/60;
+
         if (Date.compareTime(new int []{Shour,Sminute},new int []{Ehour,Eminute}) == 1){
             displayEvent(dayOfTheWeek, Shour , Sminute, 25,00,color, title);
             if (dayOfTheWeek <=6)
@@ -431,8 +501,7 @@ public class WeekController implements Initializable {
         else
         drawEvent (gridPaneToPixel(Shour,dayOfTheWeek)[0],startingY,endingY-startingY,Gwidth,color,title);
     }
-
-   static void addEvent (int Sdd,int Smm,int Syy,int Shour,int Sminute, int Edd,int Emm,int Eyy,int Ehour,int Eminute, String title, boolean Day, boolean Date, Color color){
+    void addEvent (int Sdd,int Smm,int Syy,int Shour,int Sminute, int Edd,int Emm,int Eyy,int Ehour,int Eminute, String title, boolean Day, boolean Date, Color color){
         /**
          * @param Sdate : String
          *        starting date  and time of the event
@@ -465,8 +534,12 @@ public class WeekController implements Initializable {
          * Event parameters : Date SD,Date ED, String title,boolean Day,Boolean Date
          */
         Event eve = new Event (new Date(Sdd,Smm,Syy,Shour,Sminute), new Date(Edd,Emm,Eyy,Ehour,Eminute),title,Day,Date,color);
-        if (!eve.isOverlapped())
+        if (!eve.isOverlapped()) {
             Event.EventManager.add (eve);
+        } else {
+            errorLabel.setText("Conflict Event");
+        }
+
     }
 
     @FXML
