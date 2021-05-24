@@ -41,7 +41,7 @@ public class Event{
         this.title = title;
         this.everyday  = Day;
         this.everyDate = Date;
-
+        this.color = color;
     }
     Boolean isOverlapped (){
         /**

@@ -11,7 +11,7 @@ public class Section{
     String endTime;
     int day;
     int duration;
-    String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    String[] days = {"No data", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
 
     public Section(String description, String startTime, String endTime, int day, int duration) {

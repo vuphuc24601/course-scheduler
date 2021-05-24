@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.sql.Connection;
 
-public class Controller implements Initializable {
+public class AddEventController implements Initializable {
 
     @FXML
     TextField title_id;

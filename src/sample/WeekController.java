@@ -353,7 +353,7 @@ public class WeekController implements Initializable {
         selectedSections = sections;
         courseDisplayer();
         weekViewMainEventDisplay ();
-        test();// alo hong nghe ha :<
+        test();
         return sections;
     }
 
@@ -363,8 +363,8 @@ public class WeekController implements Initializable {
             for (Section i : entry.getValue()){
                 String Stime[] = i.getStartTime().split(":");
                 String Etime[] = i.getEndTime().split(":");
-                int day =  i.getDay()- 1;
-                addEvent (MonthView.tinder(day,1,2021),1,2021,Integer.parseInt(Stime[0]),Integer.parseInt(Stime[1]),23  ,6,2021,Integer.parseInt(Etime[1]),Integer.parseInt(Etime[2]),i.getDescription(),false,true,Color.RED);
+                int day =  i.getDay()-1;
+                addEvent (MonthView.tinder(day,1,2021),1,2021,Integer.parseInt(Stime[0]),Integer.parseInt(Stime[1]),23  ,6,2021,Integer.parseInt(Etime[0]),Integer.parseInt(Etime[1]),i.getDescription(),false,true,Color.AQUA);
             }
         }
     }
@@ -383,7 +383,7 @@ public class WeekController implements Initializable {
     @FXML
     void test(){
         drawEvent(53.5,13,25,143,Color.RED,"ga`");
-        displayEvent(1,5,30,7,45,Color.BLUE,"vjp");
+        displayEvent(1,11,00,13,15,Color.BLUE,"vjp");
     }
 
 
@@ -477,15 +477,21 @@ public class WeekController implements Initializable {
             for (sample.Event eve : Event.EventManager){
                 if (Date.isDuring(eve.startDate,eve.endDate,crrDate))
                   //condition to display
+                  //int dayOfTheWeek, int Shour , int Sminute, int Ehour,int Eminute,Color color, String title
                       if  (eve.everyday){
-                          displayEvent(MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]),eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                          displayEvent(i,eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                          System.out.println ("1");
                       }
-                      else if (eve.everyDate&& MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]) == crrDate.Sdate[0])
+                      else if (eve.everyDate && MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]) == i)
                       {
-                          displayEvent(MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]),eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                          displayEvent(i,eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                          System.out.println ("2");
                       }
-                      else {
-                          displayEvent(MonthView.getDayOfTheWeek(eve.startDate.Sdate[0],eve.startDate.Sdate[1],eve.startDate.Sdate[2]),eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                      else
+                      if (Date.compareTime(eve.startDate.Sdate,crrDate.Sdate)==0)
+                      {
+                          displayEvent(i,eve.startDate.Stime[0],eve.startDate.Stime[1],eve.endDate.Stime[0],eve.endDate.Stime[1],eve.color,eve.title);
+                          System.out.println ("3");
                       }
 
             }
